@@ -1,0 +1,39 @@
+/* Estilos isolados do Laboratório de Ideias. Respeitam os temas claro e escuro. */
+.idea-layout{display:grid;grid-template-columns:minmax(245px,.8fr) minmax(0,1.2fr);gap:17px;align-items:start}
+.idea-create label,.idea-grid label,.idea-stage label,.idea-action label{display:block;font-size:12px;color:var(--muted);margin:10px 0 5px}
+.idea-create input,.idea-create textarea,.idea-create select,.idea-grid select,.idea-stage textarea,.idea-action input,.idea-action textarea{width:100%;min-width:0}
+.idea-create textarea,.idea-stage textarea,.idea-action textarea{resize:vertical}
+.idea-list-tools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.idea-list-tools input,.idea-list-tools select{min-width:0;width:100%}
+.idea-list{display:flex;flex-direction:column;gap:7px}
+.idea-item{border:1px solid var(--line);border-radius:12px;padding:11px 12px;text-align:left;background:var(--surface-alt);color:var(--ink);display:flex;flex-direction:column;gap:4px;width:100%}
+.idea-item strong{font-size:13px;overflow-wrap:anywhere}
+.idea-item span{color:var(--muted);font-size:11px}
+.idea-item.active{border-color:var(--green);background:var(--selection)}
+.idea-panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.idea-panel-head h3{font-size:19px;margin:5px 0 4px;overflow-wrap:anywhere}
+.idea-panel-head p{margin:0}
+.idea-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 16px}
+.idea-grid label{margin:0}.idea-grid select{margin-top:5px}
+.idea-tabs{display:flex;gap:7px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.idea-tabs button{border:0;background:transparent;color:var(--muted);padding:11px 10px;border-bottom:2px solid transparent}
+.idea-tabs button.active{color:var(--green);border-bottom-color:var(--green);font-weight:700}
+.idea-progress-label{display:flex;justify-content:space-between;flex-wrap:wrap;font-size:12px;gap:6px;margin-bottom:7px}
+.idea-progress-label span{color:var(--muted)}
+.idea-step-nav{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.idea-step-nav button{padding:8px 10px;min-width:35px;border:1px solid var(--line);border-radius:9px;color:var(--ink);background:var(--surface-alt);font-size:12px}
+.idea-step-nav button.active{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:700}
+.idea-stage{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--surface-alt)}
+.idea-stage h4{font-size:17px;margin:12px 0 6px}
+.idea-stage p{margin:0 0 8px;font-size:13px}
+.idea-stage textarea{min-height:135px}
+.idea-controls{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:9px}
+.idea-controls span{font-size:11px}
+.idea-controls button:disabled,.idea-task-row button:disabled{opacity:.5;cursor:default}
+.idea-action{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.idea-action h4{margin:0 0 5px;font-size:15px}
+.idea-action .subtle{margin:0}
+.idea-task-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:9px 0 18px}
+.idea-reference{margin:17px 0 0;font-size:11px}
+@media(max-width:900px){.idea-layout{grid-template-columns:1fr}}
+@media(max-width:600px){.idea-grid,.idea-list-tools{grid-template-columns:1fr}.idea-panel-head{flex-wrap:wrap}.idea-controls span{order:3;flex-basis:100%;text-align:center}}
