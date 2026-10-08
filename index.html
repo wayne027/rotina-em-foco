@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f5f1">
+<title>Rotina em Foco</title>
+<!-- Aparência: assets/css/styles.css | Funcionalidades: assets/js/ -->
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<div class="app">
+<header class="top">
+<div class="brand">
+<div class="logo">↗</div>
+<div>
+<h1>Rotina em Foco</h1>
+<p>Um próximo passo de cada vez</p>
+</div>
+</div>
+<div class="todaylabel" id="todayLabel">
+</div>
+</header>
+<nav class="nav" aria-label="Seções">
+<button class="active" data-view="home">Hoje</button>
+<button data-view="settings">⚙ Configurações</button>
+<button data-view="tasks">Tarefas</button>
+<button data-view="week">Semana</button>
+<button data-view="areas">Áreas</button>
+<button data-view="habits">Hábitos</button>
+<button data-view="checkin">Check-in</button>
+<button data-view="review">Revisão</button>
+</nav>
+<main>
+<!-- Aba: Página inicial -->
+<section class="view active" id="home">
+<div class="hero">
+<div>
+<div class="eyebrow">Seu espaço de hoje</div>
+<h2 id="greeting">Vamos começar pequeno.</h2>
+<p>Escolha uma prioridade. O resto pode esperar por enquanto.</p>
+</div>
+<div class="date">
+<span id="longDate">
+</span>
+<strong id="dayCount">0 tarefas concluídas</strong>
+</div>
+</div>
+<div class="grid">
+<div>
+<div class="card">
+<div class="cardhead">
+<div>
+<h3>O que importa hoje</h3>
+<div class="subtle">Escolha o que cabe no seu dia; pode reorganizar depois.</div>
+</div>
+<span class="pill" id="remainingPill">0 restantes</span>
+</div>
+<form class="quick" id="quickForm">
+<input id="quickTitle" placeholder="O que você precisa fazer?" aria-label="Nova tarefa">
+<button class="primary" type="submit">＋ Adicionar</button>
+</form>
+<div class="tasklist" id="todayTasks">
+</div>
+</div>
+<div class="card sectiongap">
+<div class="cardhead">
+<h3>Ritmo do dia</h3>
+<button class="secondary smallbtn" id="addRoutine">＋ bloco</button>
+</div>
+<div id="routineList">
+</div>
+<div class="quote" style="margin-top:12px">Se a rotina sair do plano, retome no próximo bloco. Não precisa compensar tudo.</div>
+</div>
+</div>
+<div>
+<div class="card">
+<div class="cardhead">
+<div>
+<h3>Começar agora</h3>
+<div class="subtle">Um foco curto já conta.</div>
+</div>
+<span class="pill">Foco</span>
+</div>
+<div class="focusbox">
+<h4 id="focusTask">Escolha uma tarefa para iniciar</h4>
+<p>Defina um tempo pequeno e comece pelo primeiro movimento.</p>
+<div class="timer" id="timer">10:00</div>
+<div class="timerrow">
+<select id="timerLength" aria-label="Duração do foco">
+<option value="10">10 min</option>
+<option value="15">15 min</option>
+<option value="25">25 min</option>
+</select>
+<button class="primary smallbtn" id="timerStart">Iniciar</button>
+<button class="secondary smallbtn" id="timerReset">Zerar</button>
+</div>
+</div>
+<div style="margin-top:16px">
+<div class="cardhead">
+<h3>Como está sua energia?</h3>
+<span class="subtle">ajuste o tamanho do plano</span>
+</div>
+<div class="row">
+<button class="secondary energy" data-energy="baixa">Baixa</button>
+<button class="secondary energy" data-energy="média">Média</button>
+<button class="secondary energy" data-energy="alta">Alta</button>
+</div>
+<div class="subtle" id="energyMessage" style="margin-top:9px">Você pode fazer menos em dias difíceis.</div>
+</div>
+</div>
+<div class="card sectiongap">
+<div class="cardhead">
+<h3>Seu progresso de hoje</h3>
+<span class="subtle" id="progressLabel">0%</span>
+</div>
+<div class="progress">
+<i id="progressBar">
+</i>
+</div>
+<div class="two" style="margin-top:14px">
+<div class="mini">
+<h4>Feito</h4>
+<p id="doneSummary">Ainda não marcou tarefas.</p>
+</div>
+<div class="mini">
+<h4>Próximo passo</h4>
+<p id="nextSummary">Adicione uma tarefa pequena para começar.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="card sectiongap">
+<div class="cardhead">
+<div>
+<h3>Um jeito simples de se organizar</h3>
+<div class="subtle">Um roteiro flexível para usar em qualquer área da vida.</div>
+</div>
+</div>
+<div class="stages">
+<div class="stage">
+<strong>01 · CAPTURAR</strong>
+<span>Anote o que está ocupando sua cabeça.</span>
+</div>
+<div class="stage">
+<strong>02 · PRIORIZAR</strong>
+<span>Escolha o que realmente precisa de atenção agora.</span>
+</div>
+<div class="stage">
+<strong>03 · COMEÇAR</strong>
+<span>Dê um primeiro passo pequeno e concreto.</span>
+</div>
+<div class="stage">
+<strong>04 · AJUSTAR</strong>
+<span>Mude o plano quando a vida mudar.</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Aba: Tarefas -->
+<section class="view" id="tasks">
+<div class="card">
+<div class="cardhead">
+<div>
+<h3>Caixa de tarefas</h3>
+<div class="subtle">Tire da cabeça, escolha quando e quebre em passos.</div>
+</div>
+<button id="clearDone" class="secondary smallbtn">Limpar concluídas</button>
+</div>
+<form class="taskform" id="taskForm">
+<input id="taskTitle" placeholder="O que precisa ser feito?" required>
+<select id="taskCategory">
+<option>Pessoal</option>
+<option>Casa</option>
+<option>Aprendizado</option>
+<option>Trabalho</option>
+<option>Igreja e voluntariado</option>
+<option>Saúde</option>
+<option>Projetos</option>
+<option>Outro</option>
+</select>
+<input id="taskDate" type="date" aria-label="Data">
+<select id="taskDuration">
+<option value="5">5 min</option>
+<option value="10">10 min</option>
+<option value="15" selected>15 min</option>
+<option value="25">25 min</option>
+<option value="45">45 min</option>
+<option value="60">60 min</option>
+</select>
+<select id="taskPriority">
+<option value="0">Normal</option>
+<option value="1">Prioridade</option>
+</select>
+<button class="primary" type="submit">Adicionar tarefa</button>
+</form>
+<div class="toolbar">
+<select id="filterCategory">
+<option value="all">Todas as áreas</option>
+<option>Pessoal</option>
+<option>Casa</option>
+<option>Aprendizado</option>
+<option>Trabalho</option>
+<option>Igreja e voluntariado</option>
+<option>Saúde</option>
+<option>Projetos</option>
+<option>Outro</option>
+</select>
+<select id="filterStatus">
+<option value="open">Em aberto</option>
+<option value="all">Todas</option>
+<option value="done">Concluídas</option>
+</select>
+<span class="subtle" id="taskCount">
+</span>
+</div>
+<div class="tasklist" id="allTasks">
+</div>
+</div>
+</section>
+<!-- Aba: Planejamento semanal -->
+<section class="view" id="week">
+<div class="card">
+<div class="cardhead">
+<div>
+<h3>Esta semana</h3>
+<div class="subtle">Um mapa leve dos próximos sete dias.</div>
+</div>
+<button class="secondary smallbtn" id="weekToday">Ir para hoje</button>
+</div>
+<div class="week" id="weekGrid">
+</div>
+</div>
+</section>
+<!-- Aba: Áreas e projetos -->
+<section class="view" id="areas">
+<div class="hero">
+<div>
+<div class="eyebrow">Sua vida em partes menores</div>
+<h2>Áreas e projetos</h2>
+<p>Veja onde estão suas tarefas e escolha uma área para focar.</p>
+</div>
+<div class="date">
+<span>Áreas disponíveis</span>
+<strong>8 espaços</strong>
+</div>
+</div>
+<div class="card">
+<div class="cardhead">
+<div>
+<h3>Visão por área</h3>
+<div class="subtle">As tarefas continuam juntas; esta visão só ajuda a encontrá-las.</div>
+</div>
+<button class="secondary smallbtn" data-open-tasks>＋ Nova tarefa</button>
+</div>
+<div class="areaGrid" id="areaGrid">
+</div>
+</div>
+<div class="card sectiongap">
+<div class="cardhead">
+<h3>Se sentir sobrecarregado</h3>
+</div>
+<div class="stages">
+<div class="stage">
+<strong>ESVAZIE A CABEÇA</strong>
+<span>Registre tudo sem decidir agora.</span>
+</div>
+<div class="stage">
+<strong>ESCOLHA UMA ÁREA</strong>
+<span>Separe o que é urgente do que pode esperar.</span>
+</div>
+<div class="stage">
+<strong>REDUZA O PASSO</strong>
+<span>Escreva a menor ação que inicia a tarefa.</span>
+</div>
+<div class="stage">
+<strong>RETOME QUANDO DER</strong>
+<span>Uma pausa ou mudança de plano não apaga seu progresso.</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Aba: Hábitos -->
+<section class="view" id="habits">
+<div class="hero">
+<div>
+<div class="eyebrow">Pequenos passos, repetidos com flexibilidade</div>
+<h2>Controle de hábitos</h2>
+<p>Crie hábitos, acompanhe seus dias e ajuste a meta ao seu ritmo real.</p>
+</div>
+<div class="date">
+<span>Hábitos ativos</span>
+<strong id="habitCount">0</strong>
+</div>
+</div>
+<div class="habitLayout">
+<div>
+<div class="card">
+<div class="cardhead">
+<div>
+<h3>Criar um hábito</h3>
+<div class="subtle">Comece com uma ação clara e pequena.</div>
+</div>
+</div>
+<form id="habitForm">
+<label class="checklabel" for="habitName">Qual hábito quer desenvolver?</label>
+<input id="habitName" placeholder="Ex.: caminhar depois do almoço" maxlength="70" required>
+<div class="checkfields">
+<div>
+<label class="checklabel" for="habitTarget">Meta por semana</label>
+<select id="habitTarget">
+<option value="1">1 dia</option>
+<option value="2">2 dias</option>
+<option value="3" selected>3 dias</option>
+<option value="4">4 dias</option>
+<option value="5">5 dias</option>
+<option value="6">6 dias</option>
+<option value="7">Todos os dias</option>
+</select>
+</div>
+<div>
+<label class="checklabel" for="habitCategory">Área</label>
+<select id="habitCategory">
+<option>Pessoal</option>
+<option>Casa</option>
+<option>Aprendizado</option>
+<option>Trabalho</option>
+<option>Igreja e voluntariado</option>
+<option>Saúde</option>
+<option>Projetos</option>
+<option>Outro</option>
+</select>
+</div>
+</div>
+<label class="checklabel" for="habitCue">Quando ou depois de quê? (opcional)</label>
+<input id="habitCue" maxlength="100" placeholder="Ex.: depois do café da manhã">
+<label class="checklabel" for="habitTiny">Qual é a versão de 2 minutos? (opcional)</label>
+<input id="habitTiny" maxlength="100" placeholder="Ex.: colocar o tênis e sair até a esquina">
+<button class="primary" type="submit" style="margin-top:14px">＋ Criar hábito</button>
+</form>
+</div>
+<div class="card sectiongap">
+<div class="cardhead">
+<div>
+<h3>Meus hábitos</h3>
+<div class="subtle">Marque hoje ou toque num hábito para ver detalhes.</div>
+</div>
+</div>
+<div class="habitList" id="habitList">
+</div>
+</div>
+</div>
+<div class="card habitDetail" id="habitDetail">
+<div class="blank">Crie ou selecione um hábito para ver o progresso e as sugestões.</div>
+</div>
+</div>
+<div class="card sectiongap">
+<div class="cardhead">
+<h3>Como usar a análise</h3>
+</div>
+<div class="stages">
+<div class="stage">
+<strong>OLHE A TENDÊNCIA</strong>
+<span>Compare a semana atual com a anterior, sem depender de uma sequência perfeita.</span>
+</div>
+<div class="stage">
+<strong>AJUSTE O TAMANHO</strong>
+<span>Se a meta estiver difícil, reduza a ação ou a frequência por enquanto.</span>
+</div>
+<div class="stage">
+<strong>DEIXE UM GATILHO</strong>
+<span>Ligue o hábito a um horário ou a algo que você já faz.</span>
+</div>
+<div class="stage">
+<strong>RECONHEÇA O QUE FUNCIONA</strong>
+<span>Quando encaixar, mantenha por mais uma semana antes de aumentar.</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Aba: Configurações e preferências -->
+<section class="view" id="settings">
+<div class="hero">
+<div>
+<div class="eyebrow">Ajuste o visual ao seu gosto</div>
+<h2>Configurações</h2>
+<p>Escolha cores confortáveis e salve sua aparência neste aparelho.</p>
+</div>
+<div class="date">
+<span>Preferências</span>
+<strong>Personalizáveis</strong>
+</div>
+</div>
+<div class="grid">
+<div class="card">
+<div class="cardhead">
+<div>
+<h3>Temas prontos</h3>
+<div class="subtle">Escolha um tema e ajuste as cores abaixo.</div>
+</div>
+</div>
+<div class="themeChoices">
+<button class="themePreset" data-theme-preset="forest">
+<i style="--swatch:#355c49">
+</i>Floresta</button>
+<button class="themePreset" data-theme-preset="ocean">
+<i style="--swatch:#245e83">
+</i>Oceano</button>
+<button class="themePreset" data-theme-preset="plum">
+<i style="--swatch:#694866">
+</i>Ameixa</button>
+<button class="themePreset" data-theme-preset="amber">
+<i style="--swatch:#9a5428">
+</i>Âmbar</button>
+<button class="themePreset" data-theme-preset="night">
+<i style="--swatch:#527fc1">
+</i>Noturno</button>
+</div>
+<div class="colorFields">
+<div>
+<label for="accentColor">Cor de destaque</label>
+<input id="accentColor" type="color" value="#355c49">
+</div>
+<div>
+<label for="backgroundColor">Cor de fundo</label>
+<input id="backgroundColor" type="color" value="#f5f4f0">
+</div>
+</div>
+<div class="settingsPreview">
+<strong>Prévia</strong>
+<span>Suas tarefas e hábitos vão usar estas cores.</span>
+<button class="primary" type="button">Botão de destaque</button>
+</div>
+<div class="row" style="margin-top:14px">
+<button class="primary" id="saveTheme" type="button">Salvar cores</button>
+<button class="secondary" id="resetTheme" type="button">Restaurar padrão</button>
+</div>
+<p class="subtle" id="themeStatus" style="margin-top:10px">As cores ficam salvas neste navegador.</p>
+</div>
+<div class="card">
+<div class="cardhead">
+<div>
+<h3>Conta e sincronização</h3>
+<div class="subtle">Seus dados continuam sob seu controle.</div>
+</div>
+<span class="pill">Drive desconectado</span>
+</div>
+<p>O link é compartilhável, mas tarefas, hábitos, check-ins, comentários, anexos e cores são armazenados neste navegador. Eles não acompanham sua conta quando você troca de aparelho.</p>
+<div class="insight">A sincronização por Google exige uma conexão de conta e um armazenamento seguro no servidor. Ela ainda não está configurada neste site.</div>
+<div class="row" style="margin-top:14px">
+<button class="secondary" type="button" id="settingsExport">Baixar meus dados</button>
+<button class="secondary" type="button" id="settingsImport">Importar dados</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Aba: Check-in diário -->
+<section class="view" id="checkin">
+<div class="hero">
+<div>
+<div class="eyebrow">Um minuto para perceber seu ritmo</div>
+<h2>Check-in diário</h2>
+<p>Registre como foi seu dia. Com o tempo, você verá padrões no gráfico.</p>
+</div>
+<div class="date">
+<span>Registros nesta janela</span>
+<strong id="checkinCount">0 dias</strong>
+</div>
+</div>
+<div class="grid">
+<div class="card">
+<div class="cardhead">
+<div>
+<h3>Como você está hoje?</h3>
+<div class="subtle">Escolha a opção mais próxima. Você pode editar o registro do dia.</div>
+</div>
+<span class="pill" id="checkinStatus">Ainda não registrado</span>
+</div>
+<form id="checkinForm">
+<label class="checklabel" for="checkinDate">Data</label>
+<input id="checkinDate" type="date" required>
+<div class="checkfields">
+<div>
+<label class="checklabel" for="checkinSleep">Como dormiu?</label>
+<select id="checkinSleep" required>
+<option value="">Escolha…</option>
+<option value="1">Muito mal</option>
+<option value="2">Mal</option>
+<option value="3">Mais ou menos</option>
+<option value="4">Bem</option>
+<option value="5">Muito bem</option>
+</select>
+</div>
+<div>
+<label class="checklabel" for="checkinEnergy">Como estava sua energia?</label>
+<select id="checkinEnergy" required>
+<option value="">Escolha…</option>
+<option value="1">Muito baixa</option>
+<option value="2">Baixa</option>
+<option value="3">Média</option>
+<option value="4">Boa</option>
+<option value="5">Muito boa</option>
+</select>
+</div>
+<div>
+<label class="checklabel" for="checkinMood">Como estava seu humor?</label>
+<select id="checkinMood" required>
+<option value="">Escolha…</option>
+<option value="1">Muito ruim</option>
+<option value="2">Ruim</option>
+<option value="3">Neutro</option>
+<option value="4">Bom</option>
+<option value="5">Muito bom</option>
+</select>
+</div>
+<div>
+<label class="checklabel" for="checkinFocus">Como foi se concentrar?</label>
+<select id="checkinFocus" required>
+<option value="">Escolha…</option>
+<option value="1">Muito difícil</option>
+<option value="2">Difícil</option>
+<option value="3">Razoável</option>
+<option value="4">Bom</option>
+<option value="5">Muito bom</option>
+</select>
+</div>
+</div>
+<label class="checklabel" for="checkinNote">Uma observação (opcional)</label>
+<input id="checkinNote" maxlength="160" placeholder="Ex.: dormi tarde, caminhei, tive um dia corrido">
+<div class="row" style="margin-top:10px">
+<button class="secondary smallbtn" type="button" id="checkinAnnotate">＋ Comentário ou anexo</button>
+<span class="subtle" id="checkinAnnotationStatus">
+</span>
+</div>
+<button class="primary" type="submit" style="margin-top:14px">Salvar check-in</button>
+</form>
+</div>
+<div>
+<div class="card">
+<div class="cardhead">
+<div>
+<h3>Seu resumo</h3>
+<div class="subtle">Médias da janela selecionada, em escala de 1 a 5.</div>
+</div>
+<select id="checkinRange" aria-label="Período do gráfico">
+<option value="7">7 dias</option>
+<option value="14">14 dias</option>
+<option value="30">30 dias</option>
+</select>
+</div>
+<div class="summaryCards">
+<div class="mini">
+<h4>Sono médio</h4>
+<p id="avgSleep">—</p>
+</div>
+<div class="mini">
+<h4>Foco médio</h4>
+<p id="avgFocus">—</p>
+</div>
+<div class="mini">
+<h4>Energia média</h4>
+<p id="avgEnergy">—</p>
+</div>
+</div>
+<div class="insight" id="checkinInsight">Registre alguns dias para começar a ver padrões.</div>
+</div>
+</div>
+</div>
+<div class="card sectiongap">
+<div class="cardhead">
+<div>
+<h3 id="chartTitle">Sono ao longo do tempo</h3>
+<div class="subtle">Dias sem registro aparecem como espaços vazios.</div>
+</div>
+<select id="chartMetric" aria-label="Indicador mostrado no gráfico">
+<option value="sleep">Sono</option>
+<option value="energy">Energia</option>
+<option value="mood">Humor</option>
+<option value="focus">Foco</option>
+</select>
+</div>
+<div class="chartWrap" id="checkinChart" role="img" aria-label="Gráfico de check-ins">
+</div>
+<div class="chartLegend">
+<span>
+<i>
+</i> Seu registro diário</span>
+<span class="subtle">Escala: 1 (baixo) a 5 (alto)</span>
+</div>
+</div>
+<p class="subtle" style="margin:12px 4px">O painel resume seus registros pessoais; use-o para observar seu ritmo e conversar com seu profissional de saúde se quiser.</p>
+</section>
+<!-- Aba: Revisão e backup -->
+<section class="view" id="review">
+<div class="card">
+<div class="cardhead">
+<div>
+<h3>Revisão gentil</h3>
+<div class="subtle">Planejamento serve para orientar e corrigir o rumo, não para medir seu valor.</div>
+</div>
+<button class="secondary smallbtn" id="saveReview">Salvar revisão</button>
+</div>
+<div class="reviewgrid">
+<div>
+<label for="reviewGood">O que consegui fazer?</label>
+<textarea id="reviewGood" placeholder="Mesmo que tenha sido uma coisa pequena…">
+</textarea>
+</div>
+<div>
+<label for="reviewHard">O que atrapalhou ou ficou pesado?</label>
+<textarea id="reviewHard" placeholder="Sem se julgar: o que aconteceu?">
+</textarea>
+</div>
+<div>
+<label for="reviewLearn">O que aprendi sobre meu ritmo?</label>
+<textarea id="reviewLearn" placeholder="Horário, energia, tamanho das tarefas…">
+</textarea>
+</div>
+<div>
+<label for="reviewTomorrow">Qual é o primeiro passo de amanhã?</label>
+<textarea id="reviewTomorrow" placeholder="Deixe uma ação pequena pronta.">
+</textarea>
+</div>
+</div>
+<div class="row" style="margin-top:14px">
+<button class="primary" id="makeTomorrow">Criar tarefa para amanhã</button>
+<button class="secondary" id="exportData">Baixar meus dados</button>
+<label class="secondary smallbtn" style="cursor:pointer">Importar dados<input id="importData" type="file" accept="application/json" hidden>
+</label>
+</div>
+<p class="subtle" style="margin-top:14px">Seus dados ficam salvos neste navegador. Baixe uma cópia para transferir para outro dispositivo.</p>
+</div>
+</section>
+</main>
+<div class="footer">Feito para apoiar a organização com TDAH: simples, flexível e sem culpa.</div>
+</div>
+<div class="modalback" id="modal">
+<div class="modal">
+<h3 id="modalTitle">Novo bloco de rotina</h3>
+<label>Horário aproximado</label>
+<input id="routineTime" type="time">
+<label>O que esse bloco ajuda você a fazer?</label>
+<input id="routineName" placeholder="Ex.: café, banho, caminhar">
+<label>Tipo</label>
+<select id="routineType">
+<option>Âncora</option>
+<option>Foco</option>
+<option>Descanso</option>
+<option>Compromisso</option>
+</select>
+<div class="modalfoot">
+<button class="secondary" id="closeModal">Cancelar</button>
+<button class="primary" id="saveRoutine">Salvar bloco</button>
+</div>
+</div>
+</div>
+<div class="toast" id="toast">
+</div>
+<div class="modalback" id="annotationModal">
+<div class="modal">
+<h3 id="annotationTitle">Comentário ou arquivo</h3>
+<div class="subtle" id="annotationContext">
+</div>
+<label for="annotationComment">Comentário</label>
+<textarea id="annotationComment" rows="4" maxlength="2000" placeholder="Escreva uma observação sobre este registro…" style="width:100%;resize:vertical">
+</textarea>
+<label for="annotationFile">Anexar arquivo (máx. 10 MB)</label>
+<input id="annotationFile" type="file">
+<div class="annotationFileState" id="annotationFileState">
+</div>
+<button class="iconbtn danger" id="removeAttachment" type="button" hidden>Remover anexo atual</button>
+<div class="modalfoot">
+<button class="secondary" id="cancelAnnotation">Cancelar</button>
+<button class="primary" id="saveAnnotation" type="button">Salvar</button>
+</div>
+</div>
+</div>
+<script src="assets/js/core.js">
+</script>
+<script src="assets/js/theme.js">
+</script>
+<script src="assets/js/state.js">
+</script>
+<script src="assets/js/annotations.js">
+</script>
+<script src="assets/js/checkin.js">
+</script>
+<script src="assets/js/habits.js">
+</script>
+<script src="assets/js/tasks.js">
+</script>
+<script src="assets/js/planner.js">
+</script>
+<script src="assets/js/events.js">
+</script>
+</body>
+</html>
