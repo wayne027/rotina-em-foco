@@ -1,0 +1,50 @@
+/* Desenvolvimento: PDI + matriz SWOT. Uso das variáveis globais de tema. */
+.dev-tabs{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:17px}
+.dev-tabs button{background:transparent;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:12px 13px;font-weight:600}
+.dev-tabs button.active{color:var(--green);border-color:var(--green)}
+.dev-pane[hidden]{display:none!important}
+.dev-layout{display:grid;grid-template-columns:minmax(240px,.76fr) minmax(0,1.24fr);gap:17px;align-items:start}
+.dev-create label,.dev-form-grid label,.dev-label,.dev-smart label{display:block;color:var(--muted);font-size:12px;margin:10px 0 5px}
+.dev-create input,.dev-form-grid input,.dev-form-grid select,.dev-label input,.dev-label textarea,.dev-smart textarea,.dev-swot-card textarea{width:100%;min-width:0}
+.dev-create .primary{margin-top:12px}
+.dev-search{display:flex;gap:8px;margin:13px 0}
+.dev-search input{flex:1;min-width:0}
+.dev-search select{max-width:150px;min-width:90px}
+.dev-list{display:flex;flex-direction:column;gap:7px}
+.dev-item{display:flex;flex-direction:column;gap:3px;text-align:left;padding:12px;background:var(--surface-alt);border:1px solid var(--line);color:var(--ink);border-radius:12px;width:100%}
+.dev-item strong{font-size:13px;overflow-wrap:anywhere}
+.dev-item span{font-size:11px;color:var(--muted)}
+.dev-item.active{border-color:var(--green);background:var(--selection)}
+.dev-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.dev-card-head h3{font-size:19px;overflow-wrap:anywhere;margin:4px 0 5px}
+.dev-card-head p{margin:0}
+.dev-form-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:11px;row-gap:3px;margin:14px 0}
+.dev-form-grid label{margin:0 0 5px}
+.dev-form-grid label input,.dev-form-grid label select{margin-top:5px}
+.dev-label{margin-top:13px}
+.dev-label textarea{resize:vertical;min-height:78px;margin-top:5px}
+.dev-label input{margin-top:5px}
+.dev-smart{background:var(--soft-bg);border:1px solid var(--line);padding:12px 14px;border-radius:12px;margin-top:15px}
+.dev-smart summary{cursor:pointer;color:var(--ink);font-size:13px;font-weight:700}
+.dev-smart p{margin:10px 0;font-size:12px}
+.dev-smart label{color:var(--ink);font-weight:600}
+.dev-smart textarea{min-height:62px;resize:vertical}
+.dev-actionbar{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:16px}
+.dev-actionbar .subtle{font-size:11px}
+.dev-actionbar button:disabled{opacity:.5;cursor:default}
+.dev-reference{margin-top:17px;font-size:11px;line-height:1.5}
+.dev-swot-matrix{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:16px}
+.dev-swot-card{border:1px solid var(--line);border-radius:14px;background:var(--surface-alt);padding:12px;min-width:0}
+.dev-swot-heading{display:flex;align-items:start;justify-content:space-between;gap:7px;flex-wrap:wrap}
+.dev-swot-heading strong{color:var(--ink);font-size:13px}
+.dev-swot-heading span{font-size:10px;color:var(--muted)}
+.dev-swot-card p{font-size:11px;min-height:34px;margin:6px 0 10px}
+.dev-swot-card textarea{font-size:13px;resize:vertical;min-height:145px;background:var(--input-bg)}
+.dev-swot-strengths{border-left:3px solid var(--green)}
+.dev-swot-weaknesses{border-left:3px solid var(--orange)}
+.dev-swot-opportunities{border-left:3px solid var(--chart-point)}
+.dev-swot-threats{border-left:3px solid var(--danger)}
+.dev-swot-conclusion{margin-top:17px;padding-top:13px;border-top:1px solid var(--line)}
+.dev-swot-conclusion h4{margin:0 0 7px}
+@media(max-width:950px){.dev-layout{grid-template-columns:1fr}}
+@media(max-width:660px){.dev-form-grid,.dev-swot-matrix{grid-template-columns:1fr}.dev-card-head{flex-wrap:wrap}.dev-search{flex-wrap:wrap}.dev-search select{max-width:none}}
