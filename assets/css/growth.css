@@ -1,0 +1,46 @@
+/* Plano de 90 dias e Aprendizagem contínua — responsivo e compatível com os temas. */
+.gr-layout{display:grid;grid-template-columns:minmax(240px,.76fr) minmax(0,1.24fr);align-items:start;gap:16px}
+.gr-layout .gr-sidebar{display:flex;flex-direction:column;gap:15px;min-width:0}
+.gr-layout .gr-main{min-width:0}
+.gr-label,.gr-phase label,.gr-meta label,.gr-creator label{display:block;color:var(--muted);font-size:12px;margin:10px 0 5px}
+.gr-label input,.gr-label textarea,.gr-phase textarea,.gr-meta input,.gr-meta select,.gr-creator input,.gr-creator textarea{display:block;width:100%;min-width:0;margin-top:5px}
+.gr-label textarea,.gr-phase textarea{resize:vertical}
+.gr-creator button[type=submit]{margin-top:12px}
+.gr-entry-list{display:flex;flex-direction:column;gap:7px}
+.gr-entry{background:var(--surface-alt);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:11px 12px;text-align:left;display:flex;flex-direction:column;gap:3px;width:100%}
+.gr-entry strong{font-size:13px;overflow-wrap:anywhere}
+.gr-entry span{color:var(--muted);font-size:11px}
+.gr-entry.active{border-color:var(--green);background:var(--selection)}
+.gr-panel-title{display:flex;justify-content:space-between;align-items:start;gap:12px}
+.gr-panel-title h3{font-size:19px;margin:0 0 5px;overflow-wrap:anywhere}
+.gr-panel-title p{margin:0}
+.gr-stats{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:17px 0 10px}
+.gr-phases{display:grid;gap:12px;margin-top:18px}
+.gr-phase{background:var(--surface-alt);border:1px solid var(--line);border-radius:15px;padding:16px}
+.gr-phase.current{outline:2px solid var(--green);outline-offset:-2px}
+.gr-phase-head{display:flex;justify-content:space-between;gap:14px;align-items:start;flex-wrap:wrap}
+.gr-phase-head h4{margin:8px 0 6px}
+.gr-phase-head p{margin:3px 0;font-size:12px}
+.gr-check{display:flex!important;align-items:center;gap:6px;white-space:nowrap}
+.gr-check input{width:auto}
+.gr-phase textarea{min-height:70px}
+.gr-phase .secondary{margin-top:11px}
+.gr-phase button:disabled,.gr-action button:disabled{opacity:.5;cursor:default}
+.gr-source{margin-top:19px;font-size:11px;line-height:1.5}
+.gr-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 13px;margin:15px 0}
+.gr-block{border-top:1px solid var(--line);padding-top:16px;margin-top:17px}
+.gr-block h4{margin:0 0 5px}
+.gr-block p.subtle{margin:3px 0 12px}
+.gr-block label{display:block;font-size:12px;color:var(--muted);margin:9px 0 5px}
+.gr-block input,.gr-block select,.gr-block textarea{display:block;width:100%;min-width:0;margin-top:5px}
+.gr-block textarea{resize:vertical}
+.gr-block button[type=submit]{margin-top:12px}
+.gr-action{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.gr-session{border:1px solid var(--line);background:var(--surface-alt);padding:11px 12px;border-radius:11px;margin:8px 0}
+.gr-session>div{display:flex;flex-wrap:wrap;align-items:baseline;gap:7px}
+.gr-session p{margin:5px 0 10px;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}
+.gr-session .subtle{font-size:12px}
+.gr-guide{font-size:13px}
+.gr-guide .stage{min-height:130px}
+@media(max-width:940px){.gr-layout{grid-template-columns:1fr}}
+@media(max-width:620px){.gr-meta{grid-template-columns:1fr}.gr-phase-head{flex-direction:column}.gr-check{white-space:normal}}

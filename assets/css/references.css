@@ -1,0 +1,11 @@
+/* Referências integradas à aba Revisão. */
+.ref-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:14px}
+.ref-tip{border:1px solid var(--line);border-radius:13px;background:var(--surface-alt);padding:13px}
+.ref-tip>div{display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:7px}
+.ref-tip strong{font-size:13px}
+.ref-tip p{font-size:13px;line-height:1.5;margin:8px 0}
+.ref-tip .subtle{font-size:11px}
+.ref-bib{margin-top:16px;border:1px solid var(--line);border-radius:12px;padding:13px}
+.ref-bib summary{cursor:pointer;font-weight:700}
+.ref-bib li{margin:12px 0;overflow-wrap:anywhere;font-size:12px;line-height:1.55}
+@media(max-width:670px){.ref-grid{grid-template-columns:1fr}}

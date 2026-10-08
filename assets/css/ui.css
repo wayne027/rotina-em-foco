@@ -1,0 +1,51 @@
+/* Visualização alternativa: estilo dinâmico; clássico mantém CSS original. */
+.ui-modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
+.ui-mode{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:7px;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--surface-alt);color:var(--ink);transition:transform .15s ease,border-color .15s ease}
+.ui-mode:hover{transform:translateY(-2px)}
+.ui-mode.active{border:2px solid var(--green);padding:15px;background:var(--selection)}
+.ui-mode-title{font-size:14px;font-weight:750}
+.ui-mode .subtle{font-size:12px}
+.ui-preview{width:100%;height:68px;background:var(--soft-bg);border:1px solid var(--line);border-radius:9px;display:flex;gap:4px;padding:8px}
+.ui-preview i{display:block;background:var(--mint);border-radius:4px}
+.ui-preview-classic{flex-direction:column}
+.ui-preview-classic i:first-child{height:10px;width:100%;background:var(--accent)}
+.ui-preview-classic i:nth-child(2){height:10px;width:85%}
+.ui-preview-classic i:nth-child(3){height:25px;width:100%;background:var(--surface-alt)}
+.ui-preview-dynamic i:first-child{width:24%;background:var(--accent)}
+.ui-preview-dynamic i:nth-child(2){width:74%;background:var(--surface-alt)}
+.ui-quickboard{display:none}
+body[data-ui=dynamic] .ui-quickboard{display:block}
+.ui-quickboard h3{margin:0 0 3px}
+.ui-quickboard .subtle{margin:0}
+.ui-hub{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-top:15px}
+.ui-hub button{min-width:0;text-align:left;border:1px solid var(--line);border-radius:13px;padding:11px;background:var(--surface-alt);color:var(--ink);display:flex;flex-direction:column;gap:6px;transition:transform .15s ease,box-shadow .15s ease}
+.ui-hub button:hover,.ui-hub button:focus-visible{transform:translateY(-3px);box-shadow:var(--shadow)}
+.ui-hub strong{font-size:13px;overflow-wrap:anywhere}
+.ui-hub small{font-size:11px;color:var(--muted)}
+.ui-hub [data-ui-count]{font-size:19px;font-weight:800;color:var(--green)}
+body[data-ui=dynamic] .hero{box-shadow:0 12px 34px #00000018}
+body[data-ui=dynamic] .card{box-shadow:0 6px 28px #00000008;transition:box-shadow .2s ease}
+body[data-ui=dynamic] .card:hover{box-shadow:0 10px 30px #00000013}
+body[data-ui=dynamic] button:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+@media(min-width:1080px){
+ body[data-ui=dynamic] .app{max-width:1480px;display:grid;grid-template-columns:222px minmax(0,1fr);column-gap:24px;grid-template-areas:"top top" "nav main" "footer footer"}
+ body[data-ui=dynamic] .top{grid-area:top}
+ body[data-ui=dynamic] .nav{grid-area:nav;position:sticky;top:17px;display:flex;flex-direction:column;align-items:stretch;gap:4px;margin:0;max-height:calc(100vh - 36px);overflow-y:auto;padding:13px;border:1px solid var(--line);background:var(--paper);border-radius:18px;box-shadow:var(--shadow)}
+ body[data-ui=dynamic] .nav button{white-space:normal;border:0;border-radius:10px;text-align:left;padding:11px 12px;line-height:1.2}
+ body[data-ui=dynamic] .nav button.active{background:var(--mint);color:var(--green)}
+ body[data-ui=dynamic] .nav button[data-view=settings]{border-radius:10px}
+ body[data-ui=dynamic] .nav button[data-view=tasks],
+ body[data-ui=dynamic] .nav button[data-view=ideas],
+ body[data-ui=dynamic] .nav button[data-view=review],
+ body[data-ui=dynamic] .nav button[data-view=settings]{margin-top:8px;border-top:1px solid var(--line);padding-top:15px}
+ body[data-ui=dynamic] main{grid-area:main;min-width:0}
+ body[data-ui=dynamic] .footer{grid-area:footer}
+}
+@media(max-width:1079px){
+ body[data-ui=dynamic] .nav{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:6px;padding-bottom:9px;scrollbar-width:thin}
+ body[data-ui=dynamic] .nav button{white-space:nowrap;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+ body[data-ui=dynamic] .nav button.active{background:var(--mint);border-color:var(--green)}
+}
+@media(max-width:900px){.ui-hub{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:580px){.ui-hub{grid-template-columns:repeat(2,minmax(0,1fr))}.ui-modes{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.ui-mode,.ui-hub button,body[data-ui=dynamic] .card{transition:none}}
