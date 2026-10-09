@@ -13,7 +13,15 @@
   const sortRoutines=()=>allRoutines().slice().sort((a,b)=>String(a.time||"").localeCompare(String(b.time||"")));
   const activityLinks=()=>window.ActivityLinks;
   const showsOn=(r,day)=>!activityLinks()||activityLinks().routineDays(r).includes(day);
-  const todayStatus=(r,marks)=>r.activityId&&activityLinks()?.isComplete(r.activityId,today())?"done":marks[r.id];
+  const todayStatus=(r,marks)=>{
+    const links=activityLinks();
+    if(r.activityId&&links){
+      const shared=links.connections(r.activityId).habits.length>0;
+      if(links.isComplete(r.activityId,today()))return "done";
+      if(shared)return marks[r.id]==="later"?"later":undefined;
+    }
+    return marks[r.id];
+  };
   let selectedWeekDay=new Date().getDay();
   const escapeText=v=>esc(String(v??""));
   const chartKey="rotina-em-foco-home-charts-v1";
@@ -69,7 +77,7 @@
       const status=isToday?todayStatus(r,marks):null;
       const label=status==="done"?"Feito":status==="later"?"Deixado para depois":"A fazer";
       const action=status==="done"?"Desfazer":status==="later"?"Retomar":"Começar daqui";
-      return '<div class="rh-sequence-item"><div class="rh-sequence-text"><small>'+escapeText(r.time||"")+' · '+escapeText(isToday?label:"Programado")+'</small><strong>'+escapeText(r.name)+'</strong>'+(r.activityId&&activityLinks()?.lookup(r.activityId)?'<small class="al-linked">↔ '+escapeText(activityLinks().lookup(r.activityId).name)+'</small>':'')+'</div>'+
+      return '<div class="rh-sequence-item"><div class="rh-sequence-text"><small>'+escapeText(r.time||"")+' · '+escapeText(isToday?label:"Programado")+'</small><strong>'+escapeText(r.name)+'</strong>'+(r.activityId&&activityLinks()?.connections(r.activityId).habits.length?'<small class="al-linked">✓ Conectado ao hábito: '+escapeText(activityLinks().connections(r.activityId).habits.map(h=>h.name).join(", "))+'</small>':'')+'</div>'+
         '<div class="rh-sequence-buttons">'+(isToday?'<button class="secondary smallbtn" type="button" data-rh-jump="'+escapeText(r.id)+'">'+action+'</button>':'')+
         '<button class="secondary smallbtn" type="button" data-rh-edit="'+escapeText(r.id)+'" aria-label="Editar '+escapeText(r.name)+'">Editar</button>'+
         '<button class="iconbtn" type="button" data-rh-delete="'+escapeText(r.id)+'" aria-label="Excluir '+escapeText(r.name)+'">×</button></div></div>';
@@ -105,6 +113,10 @@
     $home("#rhCurrentTime").textContent=next?(next.time||"Sem horário fixo"):"";
     $home("#rhCurrentName").textContent=next?next.name:list.length?(later?"Sem próximos passos por agora":"Rotina finalizada por hoje"):(allRoutines().length?"Sem passos programados hoje":"Por onde você quer começar?");
     $home("#rhCurrentHint").textContent=next?(next.hint||"Comece pelo menor movimento que conseguir."):(list.length?(later?"Você pode retomar os passos deixados para depois quando quiser.":"Você concluiu os passos previstos. Volte amanhã para um novo dia."):(allRoutines().length?"A rotina tem outros dias programados. Confira em Organizar minha rotina.":"Crie um primeiro passo simples. Sua sequência aparecerá aqui."));
+    const linkedHabits=next?.activityId&&activityLinks()?activityLinks().connections(next.activityId).habits:[];
+    const sync=$home("#rhCurrentSync");
+    sync.hidden=!linkedHabits||!linkedHabits.length;
+    sync.textContent=linkedHabits?.length?"✓ Conectado ao hábito "+linkedHabits.map(h=>h.name).join(", ")+".":"";
     $home("#rhActiveActions").hidden=!next;
     $home("#rhEmptyAction").hidden=!!allRoutines().length;
     $home("#rhAfterActions").hidden=!!next||!allRoutines().length;
@@ -129,11 +141,24 @@
   function selectedRoutineDays(){
     return [...document.querySelectorAll("#routineWeekdays input:checked")].map(b=>Number(b.value));
   }
+  function updateRoutineLinkPreview(){
+    const id=document.querySelector("#routineActivitySelect").value;
+    const el=document.querySelector("#routineSyncPreview");
+    if(!el)return;
+    const habits=activityLinks()?.connections(id)?.habits||[];
+    el.textContent=habits.length?
+      "✓ Conectado ao hábito "+habits.map(h=>h.name).join(", ")+". Concluir aqui também marcará o hábito; desmarcar no hábito também atualizará este passo.":
+      "Sem conexão. Este passo da rotina será marcado separadamente dos hábitos.";
+    el.classList.toggle("al-preview-linked",habits.length>0);
+  }
   function setRoutineActivity(selected){
     const el=document.querySelector("#routineActivitySelect");
-    if(activityLinks())el.innerHTML=activityLinks().options(selected,{noneLabel:"Sem vínculo com outras áreas"});
+    if(activityLinks())el.innerHTML=activityLinks().options(selected,{onlyHabits:true,noneLabel:"Não conectar com nenhum hábito"});
+    else el.innerHTML='<option value="">Não conectar com nenhum hábito</option>';
+    updateRoutineLinkPreview();
   }
   document.querySelector("#routineActivitySelect").addEventListener("change",e=>{
+    updateRoutineLinkPreview();
     const value=e.target.value;
     if(document.querySelector("#modal").dataset.routineEditId||!value)return;
     const related=data.habits.find(h=>h.activityId===value);
