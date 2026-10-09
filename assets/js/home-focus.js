@@ -12,13 +12,9 @@
   const $home=s=>root.querySelector(s);
   const sortRoutines=()=>allRoutines().slice().sort((a,b)=>String(a.time||"").localeCompare(String(b.time||"")));
   const escapeText=v=>esc(String(v??""));
-  const drawer=document.querySelector(".nav");
-  const menuButton=document.querySelector("#openDrawer");
-  const closeButton=document.querySelector("#closeDrawer");
-  const shade=document.querySelector("#drawerShade");
   const chartKey="rotina-em-foco-home-charts-v1";
   const charts=["tasks","habits","checkin"];
-  let prefs={tasks:false,habits:false,checkin:false},returnFocus=null,manualSelection=null,lastRenderedDay=today();
+  let prefs={tasks:false,habits:false,checkin:false},manualSelection=null,lastRenderedDay=today();
   try {
     const saved=JSON.parse(localStorage.getItem(chartKey)||"{}");
     for(const k of charts) prefs[k]=saved[k]===true;
@@ -49,36 +45,7 @@
     if(!save())toast("Não foi possível salvar a rotina. Exporte seus dados.");
     renderHome();
   }
-  function openMenu(){
-    returnFocus=document.activeElement;
-    document.body.classList.add("menu-open");
-    menuButton.setAttribute("aria-expanded","true");
-    drawer.setAttribute("aria-hidden","false");
-    closeButton.focus();
-  }
-  function closeMenu(){
-    document.body.classList.remove("menu-open");
-    menuButton.setAttribute("aria-expanded","false");
-    drawer.setAttribute("aria-hidden","true");
-    const dest=returnFocus&&document.contains(returnFocus)?returnFocus:menuButton;
-    dest.focus();returnFocus=null;
-  }
-  menuButton.addEventListener("click",()=>document.body.classList.contains("menu-open")?closeMenu():openMenu());
-  document.querySelector("#rhExplore")?.addEventListener("click",openMenu);
-  closeButton.addEventListener("click",closeMenu);
-  shade.addEventListener("click",closeMenu);
-  drawer.querySelectorAll("[data-view]").forEach(btn=>btn.addEventListener("click",()=>{
-    if(document.body.classList.contains("menu-open"))closeMenu();
-  }));
-  document.addEventListener("keydown",e=>{
-    if(e.key==="Escape"&&document.body.classList.contains("menu-open"))closeMenu();
-    if(e.key!=="Tab"||!document.body.classList.contains("menu-open"))return;
-    const controls=[...drawer.querySelectorAll("button:not([disabled])")];
-    if(!controls.length)return;
-    const first=controls[0],last=controls[controls.length-1];
-    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
-    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
-  });
+  // O menu é controlado exclusivamente por navigation.js.
 
   function renderSequence(list,marks){
     const where=$home("#routineSequenceList");
@@ -231,8 +198,6 @@
     where.innerHTML=cards.join("");
   }
   // Navegação sempre fechada ao abrir o site e voltar ao início.
-  drawer.setAttribute("aria-hidden","true");
-  menuButton.setAttribute("aria-expanded","false");
   ensureRoutineIds();
   renderHome();
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)renderHome();});
