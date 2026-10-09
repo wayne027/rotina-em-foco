@@ -1,0 +1,82 @@
+/* Guia de hábitos: conteúdo sob demanda, sem adicionar ruído à Home.
+   Usa as variáveis globais de cores e respeita a escolha de tema.
+*/
+.gd-help-btn{margin-left:auto;display:inline-flex;align-items:center;gap:7px;justify-content:center;min-width:69px;padding:9px 12px;min-height:40px;border:1px solid var(--line);background:var(--paper);color:var(--muted);font-size:12px;font-weight:600;border-radius:12px;transition:background .15s ease,color .15s ease}
+.gd-help-btn:hover,.gd-help-btn:focus-visible{background:var(--surface-alt);border-color:var(--green);color:var(--green)}
+.gd-help-btn svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.gd-header{display:flex;align-items:start;justify-content:space-between;gap:20px;background:var(--paper);padding:clamp(22px,4vw,32px);border:1px solid var(--line);border-radius:22px;margin-bottom:16px}
+.gd-header>div{max-width:670px}
+.gd-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--green);font-weight:750}
+.gd-header h2{font-size:clamp(24px,4vw,32px);margin:9px 0;line-height:1.18}
+.gd-header p{font-size:14px;line-height:1.65;color:var(--muted);margin:0}
+.gd-header button{flex-shrink:0}
+.gd-tabbar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+.gd-tabbar button,.gd-scenario-buttons button{font-size:13px;color:var(--muted);border:1px solid var(--line);background:var(--paper);border-radius:11px;padding:10px 14px}
+.gd-tabbar button.active,.gd-scenario-buttons button.active{border-color:var(--green);background:var(--mint);color:var(--green);font-weight:750}
+.gd-tabbar button:focus-visible,.gd-scenario-buttons button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.gd-pane{max-width:960px}
+.gd-pane[hidden]{display:none!important}
+.gd-pane>h3{font-size:20px;margin:10px 0 4px}
+.gd-lead{margin:0 0 17px;color:var(--muted);font-size:13px;line-height:1.6;max-width:710px}
+.gd-tip-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.gd-tip{display:flex;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:17px;min-width:0}
+.gd-count{font-size:14px;font-weight:800;color:var(--green);opacity:.78}
+.gd-tip h4{font-size:14px;margin:0 0 8px;line-height:1.3}
+.gd-tip p{font-size:13px;line-height:1.6;color:var(--muted);margin:0 0 10px}
+.gd-sources{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:7px}
+.gd-src{display:inline-block;font-size:11px;font-weight:600;color:var(--green);text-decoration:none;border:1px solid var(--line);border-radius:7px;padding:5px 8px;background:var(--surface-alt)}
+.gd-src:hover,.gd-src:focus-visible{text-decoration:underline;border-color:var(--green)}
+.gd-quiet-note{margin-top:14px;background:var(--soft-bg);border:1px solid var(--line);border-radius:14px;padding:16px}
+.gd-quiet-note strong{font-size:14px}
+.gd-quiet-note p{color:var(--soft-ink);font-size:13px;line-height:1.6;margin:7px 0 10px}
+.gd-scenario-buttons{display:flex;gap:7px;flex-wrap:wrap;margin:17px 0}
+#gdScenario{border:1px solid var(--line);background:var(--paper);border-radius:17px;padding:20px;max-width:790px}
+.gd-scenario-head{margin-bottom:13px}
+.gd-scenario-head h4{font-size:18px;margin:0 0 5px}
+.gd-scenario-head p{font-size:13px;color:var(--muted);margin:0;line-height:1.6}
+.gd-timeline{padding:0;margin:15px 0;list-style:none;border-left:2px solid var(--line)}
+.gd-timeline li{position:relative;margin:0 0 0 19px;padding:5px 0 18px 5px}
+.gd-timeline li::before{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:var(--green);left:-25px;top:11px}
+.gd-moment{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.gd-moment strong{font-size:13px}
+.gd-moment small{font-size:11px;color:var(--muted);background:var(--soft-bg);border-radius:6px;padding:2px 7px}
+.gd-timeline p{font-size:13px;color:var(--muted);line-height:1.6;margin:4px 0 0}
+.gd-endnote{font-size:12px;color:var(--muted);margin:15px 0;line-height:1.6}
+.gd-factor-list{display:flex;flex-direction:column;gap:9px}
+.gd-factor{border:1px solid var(--line);background:var(--paper);border-radius:13px;overflow:hidden}
+.gd-factor summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px;cursor:pointer;font-weight:700;font-size:14px;list-style:none}
+.gd-factor summary::-webkit-details-marker{display:none}
+.gd-factor summary span{color:var(--muted);font-size:19px}
+.gd-factor[open] summary span{transform:rotate(180deg)}
+.gd-factor>div{padding:0 17px 16px}
+.gd-factor p{color:var(--muted);font-size:13px;line-height:1.65;margin:7px 0 12px}
+.gd-factor h4{font-size:13px;margin:12px 0 2px}
+.gd-caution{background:var(--soft-bg);padding:16px;border:1px solid var(--line);border-radius:14px;margin-top:16px}
+.gd-caution strong{font-size:13px}
+.gd-caution p{font-size:12px;color:var(--soft-ink);line-height:1.6;margin:6px 0}
+.gd-specialists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.gd-expert{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:17px;min-width:0}
+.gd-expert h4{font-size:14px;margin:0 0 4px}
+.gd-expert-role{color:var(--muted);font-size:11px;margin:0 0 14px}
+.gd-expert p:not(.gd-expert-role){color:var(--muted);font-size:13px;line-height:1.6}
+.gd-expert blockquote{margin:11px 0;border-left:3px solid var(--green);padding:4px 0 5px 11px}
+.gd-expert q{font-size:13px;color:var(--ink);font-weight:600}
+.gd-expert blockquote small{display:block;color:var(--muted);font-size:11px;margin-top:7px;font-weight:400}
+.gd-bibliography{margin-top:16px;border:1px solid var(--line);border-radius:13px;background:var(--paper);padding:14px}
+.gd-bibliography summary{cursor:pointer;font-size:13px;font-weight:700}
+.gd-bibliography ol{margin-top:15px;padding-left:24px}
+.gd-bibliography li{font-size:12px;line-height:1.6;margin-bottom:12px;overflow-wrap:anywhere}
+.gd-bibliography p{margin:0 0 3px}
+.gd-bibliography a{color:var(--green)}
+@media(max-width:730px){
+ .gd-tip-list,.gd-specialists{grid-template-columns:1fr}
+ .gd-header{flex-direction:column}
+ .gd-tabbar{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;padding-bottom:8px}
+ .gd-tabbar button{white-space:nowrap}
+}
+@media(max-width:530px){
+ .gd-help-btn{padding:8px 9px;gap:5px;min-width:0}
+ .gd-header{padding:20px}
+ #gdScenario{padding:15px}
+}
+@media(prefers-reduced-motion:reduce){.gd-help-btn{transition:none}}
