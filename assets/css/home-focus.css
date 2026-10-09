@@ -92,3 +92,7 @@ body[data-ui=dynamic] .ui-quickboard{display:none!important}
 
 /* O atributo hidden sempre deve prevalecer sobre layouts flex/grid personalizados. */
 #rhCharts[hidden],#rhActiveActions[hidden],#rhEmptyAction[hidden],#rhAfterActions[hidden]{display:none!important}
+
+/* Sair livremente da rotina: acesso discreto às demais áreas. */
+.rh-explore-link{display:block;margin:18px auto 0;border:0;background:none;color:var(--muted);padding:10px 13px;font-size:13px;text-decoration:underline;text-underline-offset:4px}
+.rh-explore-link:hover,.rh-explore-link:focus-visible{color:var(--green)}

@@ -64,6 +64,7 @@
     dest.focus();returnFocus=null;
   }
   menuButton.addEventListener("click",()=>document.body.classList.contains("menu-open")?closeMenu():openMenu());
+  document.querySelector("#rhExplore")?.addEventListener("click",openMenu);
   closeButton.addEventListener("click",closeMenu);
   shade.addEventListener("click",closeMenu);
   drawer.querySelectorAll("[data-view]").forEach(btn=>btn.addEventListener("click",()=>{
