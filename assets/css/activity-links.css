@@ -1,0 +1,38 @@
+/* Identificadores compartilhados e programação semanal.
+   Usa as cores da preferência atual para manter contraste nos dois temas. */
+.al-schedule-setup{margin:15px 0;padding:12px;border:1px solid var(--line);border-radius:13px;background:var(--soft-bg);min-width:0}
+.al-schedule-setup legend{color:var(--ink);font-weight:700;font-size:12px;padding:0 4px}
+.al-schedule-setup>label{display:block;margin-bottom:6px}
+.al-schedule-setup .subtle{font-size:11px;line-height:1.5;margin:9px 0 0}
+.al-schedule-setup select{width:100%;margin-bottom:9px}
+.al-schedule-setup[hidden],#habitWeekdaysWrap[hidden]{display:none!important}
+#habitWeekdaysWrap{border:0;margin:12px 0 0;padding:0}
+.al-weekdays{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.al-day{display:inline-flex;position:relative;cursor:pointer;align-items:center}
+.al-day input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+.al-day span{display:flex;align-items:center;justify-content:center;border-radius:10px;border:1px solid var(--line);min-width:42px;min-height:38px;background:var(--paper);color:var(--ink);font-size:12px;padding:6px 8px}
+.al-day input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:700}
+.al-day input:focus-visible+span{outline:3px solid var(--green);outline-offset:2px}
+.al-linked{color:var(--green)!important;font-size:11px;font-weight:600}
+.habitDay.al-planned{box-shadow:inset 0 0 0 2px var(--green)}
+.al-routine-week{margin-top:13px}
+.al-routine-week .subtle{margin:0 0 7px}
+.al-week-strip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.al-week-strip button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:53px;padding:6px 2px;border:1px solid var(--line);border-radius:9px;background:var(--surface-alt);color:var(--ink)}
+.al-week-strip button.active{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.al-week-strip button small{font-size:10px;opacity:.8}
+.al-week-strip button strong{font-size:11px}
+#rhWeekSelectionNote{font-size:11px;margin-top:8px}
+.al-new-catalog{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.al-new-catalog input{flex:1;min-width:180px}
+.al-catalog-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:9px;margin-top:14px}
+.al-catalog-row{display:flex;flex-direction:column;gap:4px;border:1px solid var(--line);background:var(--surface-alt);border-radius:11px;padding:12px;min-width:0}
+.al-catalog-row strong{font-size:13px;overflow-wrap:anywhere}
+.al-catalog-row code{font-size:10px;color:var(--muted);word-break:break-word}
+.al-catalog-row span{font-size:11px;color:var(--green)}
+.al-task-picker{display:flex;align-items:center}
+.al-task-picker select{font-size:11px;max-width:158px;min-width:95px;height:34px;border-radius:8px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#habitActivitySelect,#routineActivitySelect,#taskActivitySelect{max-width:100%}
+#habitActivitySelect,#routineActivitySelect{width:100%}
+@media(max-width:600px){.al-day span{min-width:36px;min-height:36px;padding:5px}.al-week-strip{gap:3px}.al-week-strip button strong{font-size:10px}.al-new-catalog{flex-direction:column}.al-task-picker select{max-width:115px}}
